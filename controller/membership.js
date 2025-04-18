@@ -28,6 +28,12 @@ const register = async (req, res) => {
       return sendError(res, 409, 'Email sudah terdaftar', STATUS.EMAIL_ALREADY_EXISTS);
     }
 
+    const token = jwt.sign(
+      { id: user.id, username: user.userName },
+      process.env.JWT_SECRET,
+      { expiresIn: '1d' }
+    );
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const [result] = await sequelize.query(
       `INSERT INTO "Users"
@@ -47,12 +53,9 @@ const register = async (req, res) => {
       }
     );
 
-    const user = result[0];
-    const token = jwt.sign(
-      { id: user.id, username: user.userName },
-      process.env.JWT_SECRET,
-      { expiresIn: '1d' }
-    );
+
+    const user = result?.[0];
+   
 
     return sendSuccess(res, 'Registrasi berhasil, silakan login');
   } catch (err) {
