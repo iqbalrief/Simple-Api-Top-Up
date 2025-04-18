@@ -27,9 +27,13 @@ const avatar = async (req, res) => {
             replacements.last_name = last_name;
         }
 
-        const imageUrl = process.env.NODE_ENV === 'production' 
-        ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}/uploads/${req.file.filename}` 
-        : `http://localhost:3000/uploads/${req.file.filename}`;
+        if(req.file) {
+            const imageUrl = process.env.NODE_ENV === 'production' 
+            ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}/uploads/${req.file.filename}`
+            : `http://localhost:3000/uploads/${req.file.filename}`;
+            updatedFields.profile_image = 'profile_image = :profile_image';
+            replacements.profile_image = imageUrl;
+        }
 
         if (Object.keys(updatedFields).length === 0) {
             return res.status(400).json({
