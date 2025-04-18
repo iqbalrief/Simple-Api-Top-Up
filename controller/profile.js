@@ -1,7 +1,7 @@
 const multer = require('multer');
 
 const { sequelize } = require('../models');
-const {updateProfileSchema, profileSchema} = require('../validator/membership')
+const {updateProfileSchema} = require('../validator/membership')
 const { sendError, sendSuccess, STATUS } = require('../utils/errorHandler');
 
 
@@ -82,7 +82,7 @@ const avatar = async (req, res) => {
 };
 
 const profile = async (req, res) => {
-    const { error, value } = profileSchema.validate(req.body, { abortEarly: false });
+    const { error, value } = updateProfileSchema.validate(req.body, { abortEarly: false });
 
     if (error) {
         return sendError(res, 400, 'Parameter tidak sesuai format', STATUS.VALIDATION_ERROR);
