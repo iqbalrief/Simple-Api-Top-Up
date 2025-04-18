@@ -27,13 +27,13 @@ const register = async (req, res) => {
     if (existing) {
       return sendError(res, 409, 'Email sudah terdaftar', STATUS.EMAIL_ALREADY_EXISTS);
     }
-
+    
+    const id = uuidv4();
     const token = jwt.sign(
-      { id: user.id, username: user.userName },
+      { id, email },
       process.env.JWT_SECRET,
-      { expiresIn: '1d' }
+      { expiresIn: '12h' }
     );
-
     const hashedPassword = await bcrypt.hash(password, 10);
     const [result] = await sequelize.query(
       `INSERT INTO "Users"
@@ -52,11 +52,7 @@ const register = async (req, res) => {
         type: sequelize.QueryTypes.INSERT
       }
     );
-
-
-    const user = result?.[0];
-   
-
+  
     return sendSuccess(res, 'Registrasi berhasil, silakan login');
   } catch (err) {
     return sendError(res, 500, 'Gagal registrasi', err.message, STATUS.SERVER_ERROR);
@@ -98,9 +94,6 @@ const login = async (req, res) => {
     return sendError(res, 500, 'Gagal registrasi', err.message, STATUS.SERVER_ERROR);
   }
 };
-
-
-
 
 module.exports ={
     register,

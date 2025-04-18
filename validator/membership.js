@@ -17,7 +17,7 @@ const registerSchema = Joi.object({
         'string.email': '"email" harus memiliki format yang valid',
         'any.required': '"email" wajib diisi'
     }),
-    password: Joi.string().min(6).required().messages({
+    password: Joi.string().min(8).required().messages({
         'string.base': '"password" harus berupa teks',
         'string.min': '"password" minimal 6 karakter',
         'any.required': '"password" wajib diisi'
@@ -34,7 +34,7 @@ const loginSchema = Joi.object({
       'string.email': 'Email tidak sesuai format',
       'any.required': 'Email wajib diisi'
     }),
-    password: Joi.string().min(6).required().messages({
+    password: Joi.string().min(8).required().messages({
       'string.base': 'Password harus berupa teks',
       'string.min': 'Password minimal 6 karakter',
       'any.required': 'Password wajib diisi'
