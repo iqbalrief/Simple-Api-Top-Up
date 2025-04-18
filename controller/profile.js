@@ -28,7 +28,7 @@ const avatar = async (req, res) => {
         }
 
         const imageUrl = process.env.NODE_ENV === 'production' 
-        ? `https://${process.env.RAILWAY_STATIC_URL}/uploads/${req.file.filename}` 
+        ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}/uploads/${req.file.filename}` 
         : `http://localhost:3000/uploads/${req.file.filename}`;
 
         if (Object.keys(updatedFields).length === 0) {

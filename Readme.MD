@@ -22,6 +22,7 @@ Clone repository ini ke komputer lokal Anda dengan menggunakan perintah berikut:
 git clone 
 cd nama-project
 2. Install Dependencies
+npm install
 Setelah berhasil meng-clone project, install semua dependency yang dibutuhkan menggunakan npm:
 
 3. Setup Environment File (.env)
@@ -34,14 +35,19 @@ DB_USERNAME=root
 DB_PASSWORD=password_anda
 DB_NAME=nama_database
 DB_HOST=localhost
+DB_PORT=port anda
 DB_DIALECT=database
+RAILWAY_PUBLIC_DOMAIN
 
-4. Jalankan Database Migration
-Jika Anda belum membuat tabel-tabel di database, jalankan migration menggunakan sequelize-cli untuk membuat tabel yang dibutuhkan:
-npx sequelize-cli db:migrate
+4. Jalankan Database
+
+Jika Anda belum membuat tabel-tabel di database,
+npx sequelize-cli db:create atau npm run create
+npx sequelize-cli db:migrate atau npm run migrate
+npx sequelize: db:seed:all atau npm run seed
 
 5. Jalankan Proyek
 Jalankan aplikasi menggunakan perintah berikut:
+pasang nodemon script start di package.json
 
-
-npx nodemon app.js
+npm start
