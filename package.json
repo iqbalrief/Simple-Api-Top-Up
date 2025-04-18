@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "create": "npx sequelize db:create",
     "delete": "npx sequlize db:drop",
     "migrate": "npx sequelize db:migrate",
