@@ -1,7 +1,7 @@
 const multer = require('multer');
 
 const { sequelize } = require('../models');
-const {updateProfileSchema} = require('../validator/membership')
+const {updateProfileSchema, profileSchema} = require('../validator/membership')
 const { sendError, sendSuccess, STATUS } = require('../utils/errorHandler');
 
 
